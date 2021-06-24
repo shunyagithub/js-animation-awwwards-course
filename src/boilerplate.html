@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>03 - Create a pulsing motion with Math.sin()</title>
+    <title>Boilerplate</title>
 
     <style>
       * {
@@ -42,7 +42,7 @@
     <a id="go-back" href="/">Go Back</a>
 
     <div id="container">
-      <h1>03 - Create a pulsing motion with Math.sin()</h1>
+      <h1>02 - HTML5 canvas rendering fundamentals</h1>
       <canvas id="canvas"></canvas>
     </div>
 
@@ -56,8 +56,8 @@
       canvas.width = CANVAS_WIDTH * devicePixelRatio
       canvas.height = CANVAS_HEIGHT * devicePixelRatio
 
-      canvas.style.setProperty("width", `${CANVAS_WIDTH}px`)
-      canvas.style.setProperty("height", `${CANVAS_HEIGHT}px`)
+      canvas.style.setProperty("width", CANVAS_WIDTH + "px")
+      canvas.style.setProperty("height", CANVAS_HEIGHT + "px")
 
       const ctx = canvas.getContext("2d")
 
@@ -68,26 +68,6 @@
         ts /= 1000
 
         ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-        const circleX = canvas.width / 2
-        const circleY = canvas.height / 2
-        const circleRadius = 100 + Math.sin(ts * 2) * 50 //50 - 150
-
-        const circleStartAngle = 0
-        const circleEndAngle = Math.PI * 2
-        const circleConterclockwise = false
-
-        ctx.fillStyle = "blue"
-        ctx.beginPath()
-        ctx.arc(
-          circleX,
-          circleY,
-          circleRadius,
-          circleStartAngle,
-          circleEndAngle,
-          circleConterclockwise
-        )
-        ctx.fill()
 
         requestAnimationFrame(drawFrame)
       }

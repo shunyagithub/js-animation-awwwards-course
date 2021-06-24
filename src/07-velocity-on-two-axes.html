@@ -1,94 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>07 - Velocity on two axes</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07 - Velocity on two axes</title>
 
-  <style>
-      
-    * { margin: 0; padding: 0; }
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: sans-serif;
-      text-align: center;
-    }
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        text-align: center;
+      }
 
-    h1 {
-      font-size: 1.5em;
-      margin-bottom: 1em;
-    }
+      h1 {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+      }
 
-    #go-back {
-      position: fixed;
-      top: 1em;
-      left: 1em;
-    }
+      #go-back {
+        position: fixed;
+        top: 1em;
+        left: 1em;
+      }
 
-    #canvas {
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
+      #canvas {
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <a id="go-back" href="/">Go Back</a>
 
-  </style>
+    <div id="container">
+      <h1>07 - Velocity on two axes</h1>
+      <canvas id="canvas"></canvas>
+    </div>
 
-</head>
-<body>
+    <script>
+      // ------- Initialization -------
+      const CANVAS_WIDTH = 512
+      const CANVAS_HEIGHT = 512
 
-  <a id="go-back" href="/">Go Back</a>
+      const canvas = document.getElementById("canvas")
 
-  <div id="container">
-    <h1>07 - Velocity on two axes</h1>
-    <canvas id="canvas"></canvas>
-  </div>
+      const dpr = devicePixelRatio
+      canvas.width = CANVAS_WIDTH * devicePixelRatio
+      canvas.height = CANVAS_HEIGHT * devicePixelRatio
 
-  <script>
+      canvas.style.setProperty("width", CANVAS_WIDTH + "px")
+      canvas.style.setProperty("height", CANVAS_HEIGHT + "px")
 
-    // ------- Initialization -------
-    const CANVAS_WIDTH = 512
-    const CANVAS_HEIGHT = 512
+      const ctx = canvas.getContext("2d")
 
-    const canvas = document.getElementById('canvas')
+      let posX = canvas.width / 2
+      let posY = canvas.height / 2
 
-    const dpr = devicePixelRatio
-    canvas.width = CANVAS_WIDTH * devicePixelRatio
-    canvas.height = CANVAS_HEIGHT * devicePixelRatio
-
-    canvas.style.setProperty('width', CANVAS_WIDTH + 'px')
-    canvas.style.setProperty('height', CANVAS_HEIGHT + 'px')
-
-    const ctx = canvas.getContext('2d')
-
-    let posX = 0
-    let posY = 0
-    
-    let oldTime = 0
-
-    requestAnimationFrame(drawFrame)
-
-    // ------- Render Loop -------
-    function drawFrame (ts) {
-      ts /= 1000
-      const dt = ts - oldTime
-      oldTime = ts
-
-      // clear our canvas contents
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      posX += dt * 100
-      posY += dt * 50
-
-      ctx.fillRect(posX, posY, 40, 40)
+      let oldTime = 0
 
       requestAnimationFrame(drawFrame)
-    }
 
-  </script>
-  
-</body>
+      // ------- Render Loop -------
+      function drawFrame(ts) {
+        ts /= 1000
+        //delta time　１つ前のフレームの時間
+        const dt = ts - oldTime //dt -> delta time
+        oldTime = ts
+
+        // clear our canvas contents
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        posX += dt * 100
+        posY += dt * 100
+
+        ctx.fillRect(posX, posY, 40, 40)
+
+        requestAnimationFrame(drawFrame)
+      }
+    </script>
+  </body>
 </html>
